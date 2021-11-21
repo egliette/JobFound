@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loginScreen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:background="@color/teal_200">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:background="@color/teal_200"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="JOB FOUND"
+                android:textStyle="bold"
+                android:textSize="30sp"
+                android:layout_marginTop="10sp"
+                android:layout_gravity="center">
+
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WHERE YOU CAN FIND A JOB"
+                android:textStyle="italic"
+                android:textSize="15sp"
+                android:layout_marginTop="10sp"
+                android:layout_gravity="center">
+
+            </TextView>
+        </LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            ></ImageView>
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background">
+
+        <TextView
+            android:id="@+id/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50sp"
+            android:shadowColor="#ff5500"
+            android:text="Sign in"
+            android:textColor="#e6b121"
+            android:textSize="50sp">
+
+        </TextView>
+        <TextView
+            android:id="@+id/loginNoficationTextView"
+            android:layout_below="@+id/app_name"
+            android:layout_width="300dp"
+            android:layout_centerInParent="true"
+            android:layout_height="40dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textAlignment="center">
+        </TextView>
+        <LinearLayout
+            android:id="@+id/userNameLinearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/loginNoficationTextView"
+            android:layout_marginTop="10sp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/userNameEditText"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:layout_marginTop="10sp"
+                android:background="@drawable/border"
+                android:hint="Email"
+                android:textSize="20dp"
+                android:drawableLeft="@drawable/ic_baseline_person_pin_24">
+
+            </EditText>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/passwordLinearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userNameLinearLayout"
+            android:layout_marginTop="10sp"
+            android:orientation="horizontal">
+
+
+            <EditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity=""
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="10sp"
+                android:background="@drawable/border"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textSize="20dp"
+                android:drawableLeft="@drawable/ic_baseline_info_24">
+
+            </EditText>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/forgotPasswordTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/passwordLinearLayout"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10sp"
+            android:backgroundTint="#188FCF"
+            android:text="Forgot Password?"
+            android:textColor="@color/black"
+            android:onClick="forgotPassword"
+            android:textSize="11dp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/forgotPasswordTextView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20sp"
+            android:backgroundTint="#0F9D58"
+            android:shadowColor="@color/white"
+            android:text="Sign in">
+
+        </Button>
+
+        <LinearLayout
+            android:id="@+id/signUpTextLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/loginButton"
+            android:layout_marginTop="20sp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New to Job Found?"
+                android:textSize="20sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40sp"
+                android:backgroundTint="#188FCF"
+                android:onClick="signUp"
+                android:text="Sign up here"
+                android:textColor="#0000FF"></Button>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>
