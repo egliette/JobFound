@@ -7,19 +7,15 @@
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/drawable/border.xml" value="0.1" />
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/drawable/ic_edit.xml" value="0.1" />
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/layout/activity_forgotpassword.xml" value="0.1" />
+        <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/layout/activity_maps.xml" value="0.1" />
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/layout/activity_reset_password.xml" value="0.1" />
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/layout/activity_signin.xml" value="0.1" />
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/layout/activity_signup.xml" value="0.1" />
-<<<<<<< HEAD
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/layout/activity_update.xml" value="0.1" />
-=======
-        <entry key="..\:/D/MiniProject/app/src/main/res/drawable/background.xml" value="0.15989583333333332" />
-        <entry key="..\:/D/MiniProject/app/src/main/res/drawable/background2.xml" value="0.15989583333333332" />
-        <entry key="..\:/D/MiniProject/app/src/main/res/layout/activity_home.xml" value="0.1337386018237082" />
->>>>>>> 23e79cb2af4b2192766cdcc6f96732fc0620c10c
       </map>
     </option>
   </component>

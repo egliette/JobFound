@@ -99,7 +99,7 @@ public class UpdateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
-        getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Update profile");
 
         etName = findViewById(R.id.etName);
         etAddress =  findViewById(R.id.etAddress);
