@@ -118,7 +118,6 @@
         android:padding="10dp"
         android:inputType="numberDecimal"
         android:hint="VND/Month"/>
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -126,5 +125,5 @@
         android:layout_margin="10dp"
         android:layout_gravity="center"
         android:padding="10dp"
-        android:id="@+id/btnJob"/>
+        android:id="@+id/btnJob" />
 </LinearLayout>
