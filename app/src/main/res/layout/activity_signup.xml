@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:background="#188FCF"
     android:layout_height="match_parent"
-    tools:context=".signup"
-    android:id="@+id/signUpScreen">
+    tools:context=".signup">
     <TextView
         android:id="@+id/app_name"
         android:layout_width="wrap_content"
@@ -50,7 +49,6 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/userNameSignUpEditText"
             android:layout_width="390dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
@@ -71,7 +69,6 @@
 
 
         <EditText
-            android:id="@+id/passwordSignUpEditText"
             android:layout_width="390dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
@@ -92,7 +89,6 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/re_passwordSignUpEditText"
             android:layout_width="390dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10sp"

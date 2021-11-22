@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnJob.setOnClickListener(view -> {
-            startActivity(new Intent(this, home.class));
+            startActivity(new Intent(this, MapsActivity.class));
         });
 
         if (mAuth.getCurrentUser() != null) {

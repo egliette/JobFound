@@ -16,7 +16,6 @@
         android:background="@drawable/background">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/userProfile"
             android:layout_width="5dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="10sp"

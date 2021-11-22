@@ -4,4 +4,5 @@
         <item>Part time</item>
         <item>Full time</item>
     </string-array>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
