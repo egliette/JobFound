@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         tvRegisterHere.setOnClickListener(view -> {
-            //startActivity(new Intent(this, RegisterActivity.class));
+            startActivity(new Intent(this, RegisterActivity.class));
         });
 
         tvForgotPassword.setOnClickListener(view -> {

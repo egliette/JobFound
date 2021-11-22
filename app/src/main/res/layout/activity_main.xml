@@ -47,26 +47,6 @@
 
     </RelativeLayout>
 
-
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Update profile"
-        android:layout_margin="10dp"
-        android:layout_gravity="center"
-        android:padding="10dp"
-        android:id="@+id/btnUpdate"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:layout_margin="10dp"
-        android:layout_gravity="center"
-        android:padding="10dp"
-        android:id="@+id/btnLogout"/>
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
