@@ -16,8 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MiniProject">
         <activity
+<<<<<<< HEAD
             android:name=".UpdateActivity"
             android:exported="true" />
+=======
+            android:name=".home"
+            android:exported="false" />
+>>>>>>> 23e79cb2af4b2192766cdcc6f96732fc0620c10c
         <activity
             android:name=".ResetPasswordActivity"
             android:exported="true" />

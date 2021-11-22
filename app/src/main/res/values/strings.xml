@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MiniProject</string>
+    <string-array name="job_name">
+        <item>Part time</item>
+        <item>Full time</item>
+    </string-array>
 </resources>
