@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MiniProject">
         <activity
+            android:name=".home"
+            android:exported="false" />
+        <activity
             android:name=".ResetPasswordActivity"
             android:exported="true" />
         <activity
