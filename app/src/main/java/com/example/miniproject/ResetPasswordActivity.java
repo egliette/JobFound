@@ -54,7 +54,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         }
 
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            etResetEmail.setError("Please");
+            etResetEmail.setError("Please provide correct email syntax");
             etResetEmail.requestFocus();
             return;
         }
