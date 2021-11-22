@@ -3,6 +3,7 @@ package com.example.miniproject;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -26,7 +27,8 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     EditText etLoginEmail;
     EditText etLoginPassword;
-    ProgressBar progressBar;
+
+    ProgressDialog progressDialog;
 
     FirebaseAuth mAuth;
 
@@ -34,13 +36,15 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().hide();
 
         etLoginEmail = (EditText) findViewById(R.id.etLoginEmail);
         etLoginPassword = (EditText) findViewById(R.id.etLoginPassword);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         tvRegisterHere = (TextView) findViewById(R.id.tvRegisterHere);
         tvForgotPassword = (TextView) findViewById(R.id.tvForgotPassword);
-        progressBar = (ProgressBar)  findViewById(R.id.progressBar);
+
+        progressDialog = new ProgressDialog(this);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -76,11 +80,11 @@ public class LoginActivity extends AppCompatActivity {
             etLoginPassword.requestFocus();
         }
         else {
-            progressBar.setVisibility(View.VISIBLE);
+            progressDialog.show();
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    progressBar.setVisibility(View.GONE);
+                    progressDialog.dismiss();
                     if (task.isSuccessful()){
                         Toast.makeText(LoginActivity.this, "User logged in successfully", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
