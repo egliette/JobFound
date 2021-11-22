@@ -1,37 +1,6 @@
-<<<<<<< HEAD
 <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
     <solid android:color="@android:color/white" />
-    <stroke android:width="2dp"
-        android:color="@color/black"></stroke>
-=======
-<?xml version="1.0" encoding="utf-8"?>
-<shape
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-
-    <!-- Set màu nền-->
-    <solid
-        android:color="#01BFFF" >
-    </solid>
-
-    <!-- đặt thuộc tính màu và độ rộng của đường viền -->
     <stroke
-        android:width="3dp"
-        android:color="#01CFFF" >
-    </stroke>
-
-    <!-- các thuộc tính căn chỉnh-->
-    <padding
-        android:left="10dp"
-        android:top="10dp"
-        android:right="10dp"
-        android:bottom="10dp" >
-    </padding>
-
-    <!-- và đây là bán kính đường tròn ở 4 góc -->
-    <corners
-        android:radius="20dp" >
-    </corners>
-
->>>>>>> f02cf95 (MapActivity commit)
+        android:width="2dp"
+        android:color="@color/black" />
 </shape>
