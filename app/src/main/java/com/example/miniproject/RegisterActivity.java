@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -55,6 +56,11 @@ public class RegisterActivity extends AppCompatActivity {
         String email = etRegEmail.getText().toString();
         String password = etRegPassword.getText().toString();
 
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            etRegEmail.setError("Please provide correct email syntax");
+            etRegEmail.requestFocus();
+            return;
+        }
         if (TextUtils.isEmpty(email)) {
             etRegEmail.setError("Email cannot be empty");
             etRegEmail.requestFocus();

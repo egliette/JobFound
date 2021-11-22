@@ -14,8 +14,8 @@ public class signin extends AppCompatActivity {
         setContentView(R.layout.activity_signin);
     }
     public void forgotPassword(View view) {
-        Intent intent=new Intent(this,forgotpassword.class);
-        startActivity(intent);
+        //Intent intent=new Intent(this,forgotpassword.class);
+        //startActivity(intent);
     }
 
     public void signUp(View view) {

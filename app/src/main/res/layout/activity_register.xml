@@ -3,11 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/loginScreen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="#DADDFC"
+    tools:context=".RegisterActivity"
+    android:background="#2E4C6D"
     android:orientation="vertical">
 
 
@@ -33,7 +32,7 @@
             android:padding="10dp"
             android:textAlignment="center"
             android:textSize="50dp"
-            android:textColor="#DADDFC"
+            android:textColor="#396EB0"
             android:text="REGISTER"/>
 
 
@@ -48,7 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
-                android:textColor="#DADDFC"
+                android:textColor="#396EB0"
                 android:id="@+id/etRegEmail"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Password"
                 android:inputType="textPassword"
-                android:textColor="#DADDFC"
+                android:textColor="#396EB0"
                 android:id="@+id/etRegPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,14 +88,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Has registered? "
-                android:textColor="#DADDFC"/>
+                android:textColor="#396EB0"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Login here."
                 android:layout_gravity="center"
                 android:textStyle="bold"
-                android:textColor="#396EB0"
+                android:textColor="#2E4C6D"
                 android:id="@+id/tvLoginHere"/>
         </LinearLayout>
     </LinearLayout>
