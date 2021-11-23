@@ -10,12 +10,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     TextView tvHello;
     ImageView ivLogout;
     ImageView ivUpdate;
+    EditText etSalary;
     ArrayList<String> provinceList;
     Spinner spinnerJob,spinnerProvince;
 
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         btnJob = (Button) findViewById(R.id.btnJob);
         tvHello = (TextView) findViewById(R.id.tvHello);
         spinnerJob = (Spinner) findViewById(R.id.jobSpinner);
+        etSalary = (EditText) findViewById(R.id.etSalary);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -62,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
         spinnerProvince=(Spinner)findViewById(R.id.provinceSpinner);
         provinceList=new ArrayList<>();
-        provinceList.add("Hồ Chí Minh");
+        provinceList.add("Phú Yên");
+        provinceList.add("TP. Hồ Chí Minh");
         provinceList.add("Hà Nội");
         ArrayAdapter<String > adapter1 = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item,
@@ -83,13 +88,29 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnJob.setOnClickListener(view -> {
-            startActivity(new Intent(this, MapsActivity.class));
+            getJobs();
         });
 
         if (mAuth.getCurrentUser() != null) {
             String userEmail = mAuth.getCurrentUser().getEmail();
             tvHello.setText(tvHello.getText().toString()+userEmail);
         }
+    }
+
+    private void getJobs() {
+        Intent  intent = new Intent(this, MapsActivity.class);
+        String salary = etSalary.getText().toString().trim();
+        if (salary.isEmpty()) {
+            etSalary.setError("Please provide salary of job");
+            return;
+        }
+
+
+        intent.putExtra("type", getJobtype());
+        intent.putExtra("province", getProvince());
+        intent.putExtra("salary", salary);
+
+        startActivity(intent);
     }
 
     @Override

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="500dp"
+    android:orientation="vertical"
+    android:background="#DADDFC">
+
+    <ScrollView
+        android:layout_width="350dp"
+        android:layout_height="500dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#2E4C6D"
+                android:textColor="#DADDFC"
+                android:text="Title"
+                android:textSize="20dp"
+                android:padding="10dp"
+                android:id="@+id/tvTitle"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#396EB0"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:textStyle="bold"
+                android:text="Province"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#396EB0"
+                android:text="Phú Yên"
+                android:textSize="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/tvProvince"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#396EB0"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Phone"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#396EB0"
+                android:text="1234567890"
+                android:textSize="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/tvPhone"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#396EB0"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Salary"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#396EB0"
+                android:text="1000000-2000000 VND/month"
+                android:textSize="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/tvSalary"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#396EB0"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Requirements"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#396EB0"
+                android:text="- Got A\n- Have B"
+                android:textSize="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/tvRequirements"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#396EB0"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="Description"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#396EB0"
+                android:text="We need you. We need you."
+                android:textSize="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/tvDescription"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:background="#2E4C6D"
+                android:textColor="#DADDFC"
+                android:text="Find Path"
+                android:id="@+id/btnFindPath"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

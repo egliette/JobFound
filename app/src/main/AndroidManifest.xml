@@ -39,16 +39,19 @@
         <activity
             android:name=".MapsActivity"
             android:exported="true"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".home"
             android:exported="true" />
         <activity
             android:name=".UpdateActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ResetPasswordActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".RegisterActivity"
             android:exported="true"
