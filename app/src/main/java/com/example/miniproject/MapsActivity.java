@@ -54,6 +54,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public static int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     FusedLocationProviderClient client;
     private ArrayList<Job> jobArrayList;
+    private MapDirectionHelper mapDirectionHelper;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore fStore;
@@ -119,7 +120,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     location.getLongitude());
                             MarkerOptions options = new MarkerOptions()
                                     .position(latLng).title("I'm here");
-                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
+                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                             googleMap.addMarker(options);
                         }
                     });
@@ -151,6 +152,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mapDirectionHelper = new MapDirectionHelper(mMap,this);
 
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
@@ -184,7 +186,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         .title(title);
 
 
-                                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
+                                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                                 mMap.addMarker(options);
 
                             }
@@ -197,6 +199,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(@NonNull Marker marker) {
+                mapDirectionHelper.clearDirectionResult();
                 for (int i = 0; i<jobArrayList.size(); i++) {
                     Job job = jobArrayList.get(i);
                     if (marker.getPosition().latitude == job.getLat() &&
@@ -227,6 +230,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 // myLatLng giữ vị trí của mình hiện tại
                                 // job.getLat() và job.getLng() là vĩ độ và kinh độ
                                 // của công việc thứ i đang xét
+                                mapDirectionHelper.startDirection(myLatLng, marker.getPosition());
+                                dialog.dismiss();
+
                             }
                         });
 
