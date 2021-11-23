@@ -74,8 +74,7 @@
             android:layout_margin="10dp"
             android:text="Register"
             android:layout_gravity="center"
-            android:id="@+id/btnRegister"
-            android:drawableLeft="@drawable/ic_noun_sign_up_6478"/>
+            android:id="@+id/btnRegister"/>
 
         <LinearLayout
             android:layout_width="match_parent"
