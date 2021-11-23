@@ -8,14 +8,23 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +34,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -40,9 +51,10 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
     private GoogleMap mMap;
     private ActivityMaps2Binding binding;
@@ -55,9 +67,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     FusedLocationProviderClient client;
     private ArrayList<Job> jobArrayList;
     private MapDirectionHelper mapDirectionHelper;
+    LocationManager locationManager;
+    Marker myMarker;
 
-    private FirebaseAuth mAuth;
-    private FirebaseFirestore fStore;
+    FirebaseAuth mAuth;
+    FirebaseFirestore fStore;
+    String mType;
+    String mProvince;
+    String mSalary;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,11 +94,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         jobArrayList = new ArrayList<Job>();
 
         Intent intent = getIntent();
-        String type = intent.getStringExtra("type");
-        String province = intent.getStringExtra("province");
-        String salary = intent.getStringExtra("salary");
-        tvInfo.setText(type+"\n"+province+"\n"+salary);
-
+        mType = intent.getStringExtra("type");
+        mProvince = intent.getStringExtra("province");
+        mSalary = intent.getStringExtra("salary");
+        tvInfo.setText(mType+"\n"+mProvince+"\n"+mSalary);
+        progressDialog = new ProgressDialog(this);
 
         client = LocationServices.getFusedLocationProviderClient(this);
 
@@ -92,6 +110,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
         }
 
+        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
 
     }
 
@@ -106,6 +126,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
         Task<Location> task = client.getLastLocation();
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
@@ -116,12 +137,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         public void onMapReady(@NonNull GoogleMap googleMap) {
                             LatLng latLng = new LatLng(location.getLatitude(),
                                     location.getLongitude());
+                            MarkerOptions options = new MarkerOptions()
+                                    .position(latLng).title("I'm here")
+                                    .icon(getMarkerIcon("#008000"));
                             myLatLng = new LatLng(location.getLatitude(),
                                     location.getLongitude());
-                            MarkerOptions options = new MarkerOptions()
-                                    .position(latLng).title("I'm here");
-                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-                            googleMap.addMarker(options);
+                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
+                            myMarker = googleMap.addMarker(options);
                         }
                     });
                 }
@@ -140,15 +162,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -157,7 +170,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
-
+        progressDialog.show();
         fStore.collection("jobs")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -176,22 +189,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 Long maxSalary = (Long) data.get("maxSalary");
                                 Double lat = (Double) data.get("lat");
                                 Double lng = (Double) data.get("lng");
-                                Job newJob = new Job(title, province, requirements,
-                                        description, type , phone, minSalary,
-                                        maxSalary, lat, lng);
-                                jobArrayList.add(newJob);
-                                LatLng latLng = new LatLng(lat, lng);
-                                MarkerOptions options = new MarkerOptions()
-                                        .position(latLng)
-                                        .title(title);
 
-
-                                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-                                mMap.addMarker(options);
-
+                                Long salary = Long.valueOf(MapsActivity.this.mSalary).longValue();
+                                if (MapsActivity.this.mProvince.equals(province) &&
+                                        MapsActivity.this.mType.equals(type) &&
+                                        salary<=maxSalary && salary>=minSalary) {
+                                    Job newJob = new Job(title, province, requirements,
+                                            description, type, phone, minSalary,
+                                            maxSalary, lat, lng);
+                                    jobArrayList.add(newJob);
+                                    LatLng latLng = new LatLng(lat, lng);
+                                    MarkerOptions options = new MarkerOptions()
+                                            .position(latLng)
+                                            .title(title);
+                                    mMap.addMarker(options);
+                                }
                             }
+                            progressDialog.dismiss();
                         }  else {
-
+                            progressDialog.dismiss();
                         }
                     }
                 });
@@ -214,6 +230,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         TextView requirements = (TextView) dialog.findViewById(R.id.tvRequirements);
                         TextView description = (TextView) dialog.findViewById(R.id.tvDescription);
                         Button btnFindPath = (Button) dialog.findViewById(R.id.btnFindPath);
+                        Button btnCall = (Button) dialog.findViewById(R.id.btnCall);
+
 
                         title.setText(job.getTitle());
                         province.setText(job.getProvince());
@@ -236,17 +254,63 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             }
                         });
 
+                        btnCall.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(Intent.ACTION_DIAL);
+                                intent.setData(Uri.parse("tel:" + phone.getText().toString().trim()));
+                                if (intent.resolveActivity(getPackageManager()) != null) {
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+
                         dialog.show();
 
                     }
                 }
-
-
-
                 return false;
             }
         });
     }
 
+    private BitmapDescriptor getMarkerIcon(String color) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(Color.parseColor(color), hsv);
+        return BitmapDescriptorFactory.defaultMarker(hsv[0]);
+    }
+
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+        LatLng latLng = new LatLng(location.getLatitude(),
+                location.getLongitude());
+        MarkerOptions options = new MarkerOptions()
+                .position(latLng).title("I'm here")
+                .icon(getMarkerIcon("#008000"));
+        myLatLng = new LatLng(location.getLatitude(),
+                location.getLongitude());
+        if (myMarker!=null) {
+            myMarker.remove();
+        }
+        if (mMap!=null) {
+           myMarker = mMap.addMarker(options);
+        }
+
+    }
+
+    @Override
+    public void onLocationChanged(@NonNull List<Location> locations) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(@NonNull String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(@NonNull String provider) {
+
+    }
 }
 
