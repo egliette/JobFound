@@ -6,7 +6,7 @@
     tools:context=".LoginActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2E4C6D"
+    android:background="@drawable/login"
     android:orientation="vertical">
 
 
