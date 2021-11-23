@@ -13,6 +13,8 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -208,6 +210,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         TextView salary = (TextView) dialog.findViewById(R.id.tvSalary);
                         TextView requirements = (TextView) dialog.findViewById(R.id.tvRequirements);
                         TextView description = (TextView) dialog.findViewById(R.id.tvDescription);
+                        Button btnFindPath = (Button) dialog.findViewById(R.id.btnFindPath);
 
                         title.setText(job.getTitle());
                         province.setText(job.getProvince());
@@ -217,6 +220,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         requirements.setText(job.getRequirements().replaceAll("newline", "\n"));
                         //Toast.makeText(MapsActivity.this, job.getRequirements().replaceAll("newline", "\n"), Toast.LENGTH_SHORT).show();
                         description.setText(job.getDescription());
+
+                        btnFindPath.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                // myLatLng giữ vị trí của mình hiện tại
+                                // job.getLat() và job.getLng() là vĩ độ và kinh độ
+                                // của công việc thứ i đang xét
+                            }
+                        });
 
                         dialog.show();
 
