@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+//import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -61,7 +62,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FusedLocationProviderClient fusedLocationProviderClient;
     private SupportMapFragment mapFragment;
     private Location lastLocation;
-    private LatLng myLatLng;
+    private LatLng myLatLng, destlocation;
     private TextView tvInfo;
     public static int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     FusedLocationProviderClient client;
@@ -248,6 +249,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 // myLatLng giữ vị trí của mình hiện tại
                                 // job.getLat() và job.getLng() là vĩ độ và kinh độ
                                 // của công việc thứ i đang xét
+                                destlocation = marker.getPosition();
                                 mapDirectionHelper.startDirection(myLatLng, marker.getPosition());
                                 dialog.dismiss();
 
