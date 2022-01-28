@@ -6,21 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterActivity"
-    android:background="@drawable/register"
+    android:background="@drawable/login_background"
     android:orientation="vertical">
-
-
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:src="@drawable/logo_reg"/>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background"
         android:orientation="vertical"
         android:layout_weight="4">
 
@@ -28,53 +20,52 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
-            android:padding="10dp"
+            android:layout_marginTop="100dp"
             android:textAlignment="center"
-            android:textSize="50dp"
-            android:textColor="#396EB0"
-            android:text="REGISTER"/>
+            android:textSize="40dp"
+            android:textColor="#C5CAE9"
+            android:text="Register"/>
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
+        <EditText
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="5dp">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Email"
-                android:textColor="#396EB0"
-                android:id="@+id/etRegEmail"/>
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_gravity="center"
+            android:textColorHint="#C5CAE9"
+            android:layout_marginTop="250dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:hint="Email"
+            android:textColor="#C5CAE9"
+            android:inputType="text"
+            android:maxLines="1"
+            android:background="@drawable/login_edittext_background"
+            android:id="@+id/etRegEmail"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
+        <EditText
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="5dp">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:textColor="#396EB0"
-                android:id="@+id/etRegPassword"/>
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_gravity="center"
+            android:textColorHint="#C5CAE9"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:hint="Password"
+            android:textColor="#C5CAE9"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:background="@drawable/login_edittext_background"
+            android:id="@+id/etRegPassword"/>
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:layout_margin="10dp"
+            android:background="@drawable/login_button_background"
             android:text="Register"
             android:layout_gravity="center"
             android:id="@+id/btnRegister"/>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -88,14 +79,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Has registered? "
-                android:textColor="#396EB0"/>
+                android:textColor="#C5CAE9"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Login here."
                 android:layout_gravity="center"
                 android:textStyle="bold"
-                android:textColor="#2E4C6D"
+                android:textColor="#303F9F"
                 android:id="@+id/tvLoginHere"/>
         </LinearLayout>
     </LinearLayout>

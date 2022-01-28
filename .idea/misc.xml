@@ -6,11 +6,13 @@
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/drawable/background.xml" value="0.1" />
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/drawable/border.xml" value="0.1" />
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/drawable/ic_edit.xml" value="0.1" />
+        <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/drawable/selector.xml" value="0.1" />
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/layout/activity_forgotpassword.xml" value="0.1" />
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/layout/activity_location.xml" value="0.1" />
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/layout/activity_main_2.xml" value="0.1" />
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/layout/activity_map.xml" value="0.1" />
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/layout/activity_maps.xml" value="0.1" />
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/layout/activity_maps2.xml" value="0.1" />
@@ -20,6 +22,7 @@
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/layout/activity_signup.xml" value="0.1" />
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/layout/activity_update.xml" value="0.1" />
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/layout/job_information.xml" value="0.1" />
+        <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/menu/menu_navigation.xml" value="0.1" />
         <entry key="..\:/3rdYear/PTPMCTBDD/MiniProject/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/ntdun/AndroidStudioProjects/MiniProject/app/src/main/res/layout/job_information.xml" value="0.20989583333333334" />
       </map>

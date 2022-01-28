@@ -36,6 +36,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
         btnReset =  (Button) findViewById(R.id.btnReset);
 
         progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Waiting...");
+        progressDialog.setCanceledOnTouchOutside(false);
 
         mAuth = FirebaseAuth.getInstance();
 

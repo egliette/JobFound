@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/jobsNearby"
+        android:title="Jobs Nearby"
+        android:icon="@drawable/jobs_nearby_icon"/>
+
+    <item
+        android:id="@+id/recruitment"
+        android:title="Recruitment"
+        android:icon="@drawable/recruitment_icon"/>
+
+    <item
+        android:id="@+id/profile"
+        android:title="Profile"
+        android:icon="@drawable/profile_icon"/>
+
+    <item
+        android:id="@+id/logOut"
+        android:title="Log Out"
+        android:icon="@drawable/log_out_icon"/>
+</menu>

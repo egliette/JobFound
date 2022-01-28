@@ -40,6 +40,8 @@ public class RegisterActivity extends AppCompatActivity {
         etRegPassword = (EditText) findViewById(R.id.etRegPassword);
 
         progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Waiting...");
+        progressDialog.setCanceledOnTouchOutside(false);
 
         mAuth = FirebaseAuth.getInstance();
 

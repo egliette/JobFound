@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -34,6 +35,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -99,7 +101,33 @@ public class UpdateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
-        getSupportActionBar().setTitle("Update profile");
+        getSupportActionBar().setTitle("Update Profile");
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        bottomNavigationView.setSelectedItemId(R.id.profile);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.profile:
+                        return true;
+                    case R.id.jobsNearby:
+                        startActivity(new Intent(getApplicationContext(),
+                                MainActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.logOut:
+                        mAuth.signOut();
+                        startActivity(new Intent(getApplicationContext(),
+                                LoginActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                }
+                return false;
+            }
+        });
 
         etName = findViewById(R.id.etName);
         etAddress =  findViewById(R.id.etAddress);
@@ -108,6 +136,8 @@ public class UpdateActivity extends AppCompatActivity {
         etMail = findViewById(R.id.etMail);
         btnUpdate = (Button) findViewById(R.id.btnUpdate);
         progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Updating...");
+        progressDialog.setCanceledOnTouchOutside(false);
         ivAvatar = (ImageView) findViewById(R.id.ivAvatar);
 
         mAuth = FirebaseAuth.getInstance();

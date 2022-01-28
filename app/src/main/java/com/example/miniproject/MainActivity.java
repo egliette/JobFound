@@ -1,11 +1,13 @@
 package com.example.miniproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -36,13 +39,40 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
+        setContentView(R.layout.activity_main_2);
+        getSupportActionBar().setTitle("Search Jobs Nearby");
+        //getSupportActionBar().hide();
 
-        ivLogout = (ImageView) findViewById(R.id.ivLogout);
-        ivUpdate = (ImageView) findViewById(R.id.ivUpdate);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        bottomNavigationView.setSelectedItemId(R.id.jobsNearby);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.jobsNearby:
+                        return true;
+                    case R.id.profile:
+                        startActivity(new Intent(getApplicationContext(),
+                                UpdateActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.logOut:
+                        mAuth.signOut();
+                        startActivity(new Intent(getApplicationContext(),
+                                LoginActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                }
+                return false;
+            }
+        });
+
+//        ivLogout = (ImageView) findViewById(R.id.ivLogout);
+//        ivUpdate = (ImageView) findViewById(R.id.ivUpdate);
+//        tvHello = (TextView) findViewById(R.id.tvHello);
         btnJob = (Button) findViewById(R.id.btnJob);
-        tvHello = (TextView) findViewById(R.id.tvHello);
         spinnerJob = (Spinner) findViewById(R.id.jobSpinner);
         etSalary = (EditText) findViewById(R.id.etSalary);
 
@@ -78,14 +108,14 @@ public class MainActivity extends AppCompatActivity {
 
         spinnerProvince.setAdapter(adapter1);
 
-        ivLogout.setOnClickListener(view -> {
-            mAuth.signOut();
-            startActivity(new Intent(this, LoginActivity.class));
-        });
-
-        ivUpdate.setOnClickListener(view -> {
-            startActivity(new Intent(this, UpdateActivity.class));
-        });
+//        ivLogout.setOnClickListener(view -> {
+//            mAuth.signOut();
+//            startActivity(new Intent(this, LoginActivity.class));
+//        });
+//
+//        ivUpdate.setOnClickListener(view -> {
+//            startActivity(new Intent(this, UpdateActivity.class));
+//        });
 
         btnJob.setOnClickListener(view -> {
             getJobs();
@@ -93,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (mAuth.getCurrentUser() != null) {
             String userEmail = mAuth.getCurrentUser().getEmail();
-            tvHello.setText(tvHello.getText().toString()+userEmail);
+//            tvHello.setText(tvHello.getText().toString()+userEmail);
         }
     }
 

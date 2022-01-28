@@ -45,6 +45,8 @@ public class LoginActivity extends AppCompatActivity {
         tvForgotPassword = (TextView) findViewById(R.id.tvForgotPassword);
 
         progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Logging in...");
+        progressDialog.setCanceledOnTouchOutside(false);
 
         mAuth = FirebaseAuth.getInstance();
 
