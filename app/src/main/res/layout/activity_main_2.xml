@@ -95,6 +95,33 @@
         android:layout_below="@+id/tvSalary"
         android:id="@+id/etSalary"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Distance Radius:"
+        android:textSize="18sp"
+        android:textColor="#3F51B5"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/etSalary"
+        android:id="@+id/tvDistance"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/jobs_nearby_edit_text_background"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:textColor="#3F51B5"
+        android:inputType="numberDecimal"
+        android:hint="Meters"
+        android:layout_below="@+id/tvDistance"
+        android:id="@+id/etDistance"/>
+
     <Button
         android:layout_width="147dp"
         android:layout_height="wrap_content"
@@ -106,7 +133,7 @@
         android:id="@+id/btnJob"
         android:textSize="14sp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/etSalary"/>
+        android:layout_below="@+id/etDistance"/>
     
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"

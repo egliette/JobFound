@@ -38,6 +38,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -76,6 +77,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     String mType;
     String mProvince;
     String mSalary;
+    String mDistance;
     ProgressDialog progressDialog;
 
     @Override
@@ -98,8 +100,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mType = intent.getStringExtra("type");
         mProvince = intent.getStringExtra("province");
         mSalary = intent.getStringExtra("salary");
+        mDistance = intent.getStringExtra("distance");
         tvInfo.setText(mType+"\n"+mProvince+"\n"+mSalary);
+
         progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCanceledOnTouchOutside(false);
 
         client = LocationServices.getFusedLocationProviderClient(this);
 
@@ -143,6 +149,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     .icon(getMarkerIcon("#008000"));
                             myLatLng = new LatLng(location.getLatitude(),
                                     location.getLongitude());
+                            Long distance = Long.valueOf(MapsActivity.this.mDistance).longValue();
+                            mMap.addCircle(new CircleOptions()
+                                    .center(myLatLng)
+                                    .radius(distance)
+                                    .strokeColor(Color.GREEN));
                             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
                             myMarker = googleMap.addMarker(options);
                         }
@@ -171,6 +182,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
+
+
+
         progressDialog.show();
         fStore.collection("jobs")
                 .get()
@@ -192,9 +206,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 Double lng = (Double) data.get("lng");
 
                                 Long salary = Long.valueOf(MapsActivity.this.mSalary).longValue();
+                                Long distance = Long.valueOf(MapsActivity.this.mDistance).longValue();
+                                Double true_distance = (Double) cal_distance(lat, lng,
+                                        (Double) myLatLng.latitude, (Double) myLatLng.longitude);
                                 if (MapsActivity.this.mProvince.equals(province) &&
                                         MapsActivity.this.mType.equals(type) &&
-                                        salary<=maxSalary && salary>=minSalary) {
+                                        salary<=maxSalary && salary>=minSalary &&
+                                        true_distance < distance) {
                                     Job newJob = new Job(title, province, requirements,
                                             description, type, phone, minSalary,
                                             maxSalary, lat, lng);
@@ -314,5 +332,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onProviderDisabled(@NonNull String provider) {
 
     }
+
+    private double cal_distance(double lat1, double lon1, double lat2, double lon2) {
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1))
+                * Math.sin(deg2rad(lat2))
+                + Math.cos(deg2rad(lat1))
+                * Math.cos(deg2rad(lat2))
+                * Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+        return (dist * 1.609344 * 1000);
+    }
+
+    private double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+
+    private double rad2deg(double rad) {
+        return (rad * 180.0 / Math.PI);
+    }
+
 }
 

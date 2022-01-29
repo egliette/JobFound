@@ -27,9 +27,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     Button btnJob;
-    TextView tvHello;
-    ImageView ivLogout;
-    ImageView ivUpdate;
+    EditText etDistance;
     EditText etSalary;
     ArrayList<String> provinceList;
     Spinner spinnerJob,spinnerProvince;
@@ -64,6 +62,11 @@ public class MainActivity extends AppCompatActivity {
                                 LoginActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
+                    case R.id.recruitment:
+                        startActivity(new Intent(getApplicationContext(),
+                                RecruitmentsActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
                 }
                 return false;
             }
@@ -75,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         btnJob = (Button) findViewById(R.id.btnJob);
         spinnerJob = (Spinner) findViewById(R.id.jobSpinner);
         etSalary = (EditText) findViewById(R.id.etSalary);
+        etDistance = (EditText) findViewById(R.id.etDistance);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -130,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
     private void getJobs() {
         Intent  intent = new Intent(this, MapsActivity.class);
         String salary = etSalary.getText().toString().trim();
+        String distance = etDistance.getText().toString().trim();
         if (salary.isEmpty()) {
             etSalary.setError("Please provide salary of job");
             return;
@@ -139,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("type", getJobtype());
         intent.putExtra("province", getProvince());
         intent.putExtra("salary", salary);
+        intent.putExtra("distance", distance);
 
         startActivity(intent);
     }

@@ -124,6 +124,11 @@ public class UpdateActivity extends AppCompatActivity {
                                 LoginActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
+                    case R.id.recruitment:
+                        startActivity(new Intent(getApplicationContext(),
+                                RecruitmentsActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
                 }
                 return false;
             }
