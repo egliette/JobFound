@@ -1,8 +1,14 @@
 package com.example.miniproject;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +20,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,18 +40,46 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     private ArrayList<User> mListUsers;
     private ArrayList<User> mListUsersOld;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore fStore;
+    String mName;
+    String mPhone;
+    String mAddress;
+    String mGmail;
+    Context mContext;
 
     public UserAdapter(ArrayList<User> mListUsers) {
         this.mListUsers = mListUsers;
         this.mListUsersOld = mListUsers;
+
+
     }
 
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user, parent, false);
+
+        mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        String userID = user.getUid();
+        DocumentReference documentReference = fStore.collection("users").document(userID);
+        documentReference.addSnapshotListener((Activity) mContext, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                mName = value.getString("name");
+                mAddress = value.getString("address");
+                mPhone = value.getString("phone");
+            }
+        });
+
         return new UserViewHolder(view);
     }
+
+    void addContext(Context context){
+        mContext = context;
+    };
 
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
@@ -67,6 +111,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         TextView requirements = (TextView) dialog.findViewById(R.id.tvRequirements);
         TextView description = (TextView) dialog.findViewById(R.id.tvDescription);
         Button btnCall = (Button) dialog.findViewById(R.id.btnCall);
+        Button btnSendSMS = (Button) dialog.findViewById(R.id.btnSendSMS);
 
 
         title.setText(user.getTitle());
@@ -80,6 +125,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         btnCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel:" + phone.getText().toString().trim()));
                 if (intent.resolveActivity(view.getContext().getPackageManager()) != null) {
@@ -88,8 +134,34 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             }
         });
 
+        btnSendSMS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                mGmail= mAuth.getCurrentUser().getEmail();
+
+                String tel = phone.getText().toString();
+                Uri smsUri = Uri.parse("tel:" + tel);
+                Intent intent = new Intent(Intent.ACTION_VIEW, smsUri);
+                intent.putExtra("address", tel);
+                String message = "Hello,\nI'm " + mName + ". I currently live in " +
+                        mAddress + ".\nI have read about your job posting and " +
+                        "would like to apply for it.\n You can contact me via email:" +
+                        mGmail;
+                intent.putExtra("sms_body", message);
+                intent.setType("vnd.android-dir/mms-sms");
+                if (intent.resolveActivity(view.getContext().getPackageManager()) != null) {
+                    view.getContext().startActivity(intent);
+                }
+
+            }
+
+
+        });
         dialog.show();
     }
+
+
 
     @Override
     public int getItemCount() {

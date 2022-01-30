@@ -238,7 +238,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 for (int i = 0; i<jobArrayList.size(); i++) {
                     Job job = jobArrayList.get(i);
                     if (marker.getPosition().latitude == job.getLat() &&
-                        marker.getPosition().longitude == job.getLng()) {
+                            marker.getPosition().longitude == job.getLng()) {
                         Dialog dialog = new Dialog(MapsActivity.this);
                         dialog.setContentView(R.layout.job_information);
 
@@ -313,7 +313,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             myMarker.remove();
         }
         if (mMap!=null) {
-           myMarker = mMap.addMarker(options);
+            myMarker = mMap.addMarker(options);
         }
 
     }
@@ -355,4 +355,3 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 }
-

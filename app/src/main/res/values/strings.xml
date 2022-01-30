@@ -6,4 +6,5 @@
     </string-array>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="mapbox_token">pk.eyJ1IjoibnRkdW5nMTQxMiIsImEiOiJja3c3NXN3ZXIzMm9rMzFtcTY3aDdoeXp3In0.tiOzo3VL-wXmZvlWFOC6zw</string>
+    <string name="title_activity_location_picker">LocationPickerActivity</string>
 </resources>

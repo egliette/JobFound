@@ -16,12 +16,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
@@ -43,6 +45,7 @@ public class RecruitmentsActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private ArrayList<User> userArrayList;
     private SearchView searchView;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,12 +99,24 @@ public class RecruitmentsActivity extends AppCompatActivity {
 
         userArrayList = new ArrayList<User>();
         userAdapter = new UserAdapter(userArrayList);
+        userAdapter.addContext(RecruitmentsActivity.this);
         rcvUsers.setAdapter(userAdapter);
+
 
         EventChangeListener();
 
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         rcvUsers.addItemDecoration(itemDecoration);
+
+        fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),
+                        LocationPickerActivity.class));
+                overridePendingTransition(0, 0);
+            }
+        });
     }
 
     private void EventChangeListener() {

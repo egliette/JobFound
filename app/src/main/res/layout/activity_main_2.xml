@@ -134,6 +134,7 @@
         android:textSize="14sp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/etDistance"/>
+
     
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"

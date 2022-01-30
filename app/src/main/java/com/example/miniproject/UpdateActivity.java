@@ -227,7 +227,7 @@ public class UpdateActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
 
         Uri photoUrl = user.getPhotoUrl();
-        Glide.with(this).load(photoUrl).error(R.drawable.user).into(ivAvatar);
+        Glide.with(this).load(photoUrl).error(R.drawable.profile_update_user_icon).into(ivAvatar);
         //ivAvatar.setImageURI(photoUrl);
 
         String userID = user.getUid();
